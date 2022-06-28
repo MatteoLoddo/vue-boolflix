@@ -1,17 +1,58 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <TheHeader @SearchText="onClickSearch"></TheHeader>
+    <TheMain 
+    :list-film-found="MoviesList"
+    :currently-void="ThisVoid"></TheMain>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TheHeader from './components/TheHeader.vue'
+import TheMain from './components/TheMain.vue'
+import axios from "axios";
 
 export default {
+
   name: 'App',
   components: {
-    HelloWorld
+    TheHeader, TheMain,
+  },
+
+  data() {
+    return {
+      UrlApiTMD:"https://api.themoviedb.org/3/search/movie/",
+      MyApiKey:"b9719857ee7a2b1e4e77d019f7e50a4c",
+      MoviesList:[],
+      ThisVoid:false,
+    }
+  },
+  methods: {
+    onClickSearch(searchText) {
+      this.MoviesList =[];
+      axios.get (this.UrlApiTMD,{
+        params:{
+          api_key:this.MyApiKey,
+          query:searchText,
+          lang:"it-IT",
+
+        }
+      })
+        .then((resp) => {
+          console.log(resp);
+          this.MoviesList.push(...resp.data.results)
+          if(resp.data.results.length == 0){
+            this.ThisVoid = true;
+          }else{
+            this.ThisVoid = false;
+          }
+        })
+        .catch(()=>{
+          alert('si e verificato un errore')
+        })
+
+    }
+
   }
 }
 </script>
