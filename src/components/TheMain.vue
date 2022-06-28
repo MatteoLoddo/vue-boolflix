@@ -1,8 +1,9 @@
 <template>
   <div>
     <div >
-    <h2 v-if="(ListFilmFound.length == 0)">Cerca un film</h2>
-    <h2 v-if="(CurrentlyVoid)">Nessun Risultato Trovato</h2>
+      <h2 v-if="(CurrentlyVoid)">Nessun Risultato Trovato</h2>
+    <h2  v-else-if="(ListFilmFound.length == 0)">Cerca un film</h2>
+    
     </div>
     <ul>
       <li v-for="(films, i) in ListFilmFound" :key="i" class="p-3">

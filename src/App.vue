@@ -48,7 +48,7 @@ export default {
           }
         })
         .catch(()=>{
-          alert('si e verificato un errore')
+          alert('si e verificato un errore: Impossibile lasciare i campi vuoti')
         })
 
     }

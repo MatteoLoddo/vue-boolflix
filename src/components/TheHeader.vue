@@ -1,6 +1,6 @@
 <template>
 	<div class="">
-		<input type="text" v-model="SearchText">
+		<input type="text" v-model="SearchText" placeholder="Nome Del Film">
 		<button class="btn" @click="$emit('SearchText', SearchText)">Cerca</button>
 	</div>
 </template>
