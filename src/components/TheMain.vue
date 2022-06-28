@@ -7,12 +7,13 @@
     </div>
     <ul class="list-unstyled">
       <li v-for="(films, i) in ListFilmTvFound" :key="i" class="p-3">
-        <strong v-if="(films.name)">SERIE TV</strong><br>
+        <strong class="text-danger" v-if="(films.name)">SERIE TV</strong>
+        <strong class="text-primary" v-else>FILM</strong><br>
         <span> <strong >TITLE: </strong>{{films.title||films.name}}</span><br>
         
         <div v-if="(films.original_title != films.title)"> <strong>Original TITLE: </strong>{{films.original_title}}</div>
         <span> <strong>LANG: </strong>{{films.original_language}}</span><br>
-        <span> <strong>VOTE: </strong>{{films.vote_average}}/10</span>
+        <span> <strong>VOTE: </strong>{{parseInt(parseFloat(films.vote_average))}}/10</span>
       </li>
     </ul>
   </div>

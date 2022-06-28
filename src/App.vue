@@ -55,6 +55,7 @@ export default {
 
     },
     onClickSearch(searchText,) {
+      this.MoviesList=[],
       this.callToApi(searchText,this.SearchMovie )
       this.callToApi(searchText,this.SearchTv )
       
