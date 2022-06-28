@@ -43,12 +43,13 @@ export default {
         .then((resp) => {
           console.log(resp);
           this.MoviesList.push(...resp.data.results)
-          if(resp.data.results.length == 0){
+          if(this.MoviesList.length == 0){
             this.ThisVoid = true;
-          }else{
+          }else if(this.MoviesList.length > 0){
             this.ThisVoid = false;
           }
         })
+
         .catch(()=>{
           alert('si e verificato un errore: Impossibile lasciare l area di ricerca vuota')
         })
@@ -56,6 +57,7 @@ export default {
     },
     onClickSearch(searchText,) {
       this.MoviesList=[],
+      this.ThisVoid = false,
       this.callToApi(searchText,this.SearchMovie )
       this.callToApi(searchText,this.SearchTv )
       
