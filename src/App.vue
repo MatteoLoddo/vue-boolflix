@@ -2,7 +2,7 @@
   <div id="app">
     <TheHeader @SearchText="onClickSearch"></TheHeader>
     <TheMain 
-    :list-film-found="MoviesList"
+    :list-film-tv-found="MoviesList"
     :currently-void="ThisVoid"></TheMain>
   </div>
 </template>
@@ -21,16 +21,18 @@ export default {
 
   data() {
     return {
-      UrlApiTMD:"https://api.themoviedb.org/3/search/movie/",
+      SearchMovie:"movie/",
+      SearchTv:"tv/",
+      UrlApiTMD:"https://api.themoviedb.org/3/search/",
       MyApiKey:"b9719857ee7a2b1e4e77d019f7e50a4c",
       MoviesList:[],
       ThisVoid:false,
     }
   },
   methods: {
-    onClickSearch(searchText) {
-      this.MoviesList =[];
-      axios.get (this.UrlApiTMD,{
+    callToApi(searchText, type){
+
+      axios.get (this.UrlApiTMD + type,{
         params:{
           api_key:this.MyApiKey,
           query:searchText,
@@ -48,10 +50,16 @@ export default {
           }
         })
         .catch(()=>{
-          alert('si e verificato un errore: Impossibile lasciare i campi vuoti')
+          alert('si e verificato un errore: Impossibile lasciare l area di ricerca vuota')
         })
 
-    }
+    },
+    onClickSearch(searchText,) {
+      this.callToApi(searchText,this.SearchMovie )
+      this.callToApi(searchText,this.SearchTv )
+      
+
+    },
 
   }
 }

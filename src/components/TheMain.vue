@@ -2,15 +2,17 @@
   <div>
     <div >
       <h2 v-if="(CurrentlyVoid)">Nessun Risultato Trovato</h2>
-    <h2  v-else-if="(ListFilmFound.length == 0)">Cerca un film</h2>
+    <h2  v-else-if="(ListFilmTvFound.length == 0)">Cerca un film</h2>
     
     </div>
-    <ul>
-      <li v-for="(films, i) in ListFilmFound" :key="i" class="p-3">
-        <span>{{films.title}}</span><br>
-        <span>{{films.original_title}}</span><br>
-        <span >{{films.original_language}}</span><br>
-        <span>{{films.vote_average}}</span>
+    <ul class="list-unstyled">
+      <li v-for="(films, i) in ListFilmTvFound" :key="i" class="p-3">
+        <strong v-if="(films.name)">SERIE TV</strong><br>
+        <span> <strong >TITLE: </strong>{{films.title||films.name}}</span><br>
+        
+        <div v-if="(films.original_title != films.title)"> <strong>Original TITLE: </strong>{{films.original_title}}</div>
+        <span> <strong>LANG: </strong>{{films.original_language}}</span><br>
+        <span> <strong>VOTE: </strong>{{films.vote_average}}/10</span>
       </li>
     </ul>
   </div>
@@ -21,7 +23,7 @@ export default {
   name: "TheMain",
   props: {
     CurrentlyVoid:Boolean,
-    ListFilmFound:Array,
+    ListFilmTvFound:Array,
 
   },
 
